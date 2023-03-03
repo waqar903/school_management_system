@@ -1,1 +1,3 @@
-"# school_management_system" 
+# School Management Systems 📝
+
+Project is just for practice and learning Nodejs
