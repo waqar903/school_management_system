@@ -18,14 +18,21 @@ export const addStudent = (req, res) => {
         id: uuidv4(),
         rollno: "F23-1004"
     };
-    MOCK_STUDENTS.push(new_student);
-    res.send(`${req.body.name} have been registered as a new student`);
+    const {name, age} = req.body;
+    if(!name || !age) {
+        res.status(400);
+        throw new Error("All Feilds are Mandetory.")
+    } else {
+
+        MOCK_STUDENTS.push(new_student);
+        res.send(`${req.body.name} have been registered as a new student`);
+    }
 }
 
 export const getStudent = (req, res) => {
     const id = req.params.id;
     const student = MOCK_STUDENTS.find(s => +s.id === +id);
-    res.send(student);
+    res.send({success: true, data: student});
 }
 
 export const updateStudent = (req, res) => {
