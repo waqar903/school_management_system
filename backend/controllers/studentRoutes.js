@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import asyncHandler from 'express-async-handler';
 
 // @description Mockup DB
 let MOCK_STUDENTS = [
@@ -10,14 +11,14 @@ let MOCK_STUDENTS = [
 // @description Get all Students
 // @route Get -> /api/students 
 // @accessor public
-export const getStudents = (req, res) => {
+export const getStudents = asyncHandler((req, res) => {
     res.send(MOCK_STUDENTS);
-}
+});
 
 // @description Add a Student
 // @route Get -> /api/students 
 // @accessor public
-export const addStudent = (req, res) => {
+export const addStudent = asyncHandler(async (req, res) => {
     const new_student = {
         ...req.body,
         id: uuidv4(),
@@ -30,21 +31,21 @@ export const addStudent = (req, res) => {
     }
     MOCK_STUDENTS.push(new_student);
     res.send(`${req.body.name} have been registered as a new student`);
-}
+});
 
 // @description Get specific Student
 // @route Get -> /api/students:id 
 // @accessor public
-export const getStudent = (req, res) => {
+export const getStudent = asyncHandler(async (req, res) => {
     const id = req.params.id;
     const student = MOCK_STUDENTS.find(s => +s.id === +id);
     res.send({ success: true, data: student });
-}
+})
 
 // @description update a Student
 // @route Get -> /api/students:id 
 // @accessor public
-export const updateStudent = (req, res) => {
+export const updateStudent = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { name, age } = req.body;
     let studentFound = MOCK_STUDENTS.find(s => +s.id === +id);
@@ -55,13 +56,13 @@ export const updateStudent = (req, res) => {
     if (name) studentFound.name = name;
     if (age) studentFound.age = age;
     res.send('updated a students');
-}
+})
 
 // @description delete a Student
 // @route Get -> /api/students:id 
 // @accessor public
-export const deleteStudent = (req, res) => {
+export const deleteStudent = asyncHandler(async (req, res) => {
     const { id } = req.params;
     MOCK_STUDENTS = MOCK_STUDENTS.filter(s => +s.id !== +id);
     res.send('deleted a students');
-}
+})

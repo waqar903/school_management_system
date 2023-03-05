@@ -23,6 +23,11 @@ Now we have seperate routing we have created a sample / mock data (array of obje
 
 We have installed another dependency which is very famous to assign a unique id **UUID** and also added bodyParser build in package so when user request an obect it will auto parse into json form
 
+Another thing we have acheived is to add an error handler in it. in the index.js we just need to use app.use(errorHandler) and thats it now for each call it will auto detect the errors and call. we have created the constants file for enum fo all type of errors.
+
+**Day 03:**
+We have adeded the express-async-handler so if anything went wrong our app wont crash it handles the exceptions.
+
 ### Dependencies:
 
     1) npm install express
@@ -30,6 +35,7 @@ We have installed another dependency which is very famous to assign a unique id 
     3) npm i nodemon
     4) npm i dotenv
     5) npm i uuid
+    6) npm i express-async-handler
 
 ## Development 🔥
 
