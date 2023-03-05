@@ -1,51 +1,67 @@
 import { v4 as uuidv4 } from 'uuid';
 
-
+// @description Mockup DB
 let MOCK_STUDENTS = [
-    {id: 1, name: "John Doe", age: 25, rollno:"F23-1001"},
-    {id: 2, name: "Johnny David", age: 25, rollno:"F23-1002"},
-    {id: 3, name: "Johnas Doe", age: 25, rollno:"F23-1003"},
+    { id: 1, name: "John Doe", age: 25, rollno: "F23-1001" },
+    { id: 2, name: "Johnny David", age: 25, rollno: "F23-1002" },
+    { id: 3, name: "Johnas Doe", age: 25, rollno: "F23-1003" },
 ];
 
-
+// @description Get all Students
+// @route Get -> /api/students 
+// @accessor public
 export const getStudents = (req, res) => {
     res.send(MOCK_STUDENTS);
 }
 
+// @description Add a Student
+// @route Get -> /api/students 
+// @accessor public
 export const addStudent = (req, res) => {
     const new_student = {
         ...req.body,
         id: uuidv4(),
         rollno: "F23-1004"
     };
-    const {name, age} = req.body;
-    if(!name || !age) {
+    const { name, age } = req.body;
+    if (!name || !age) {
         res.status(400);
         throw new Error("All Feilds are Mandetory.")
-    } else {
-
-        MOCK_STUDENTS.push(new_student);
-        res.send(`${req.body.name} have been registered as a new student`);
     }
+    MOCK_STUDENTS.push(new_student);
+    res.send(`${req.body.name} have been registered as a new student`);
 }
 
+// @description Get specific Student
+// @route Get -> /api/students:id 
+// @accessor public
 export const getStudent = (req, res) => {
     const id = req.params.id;
     const student = MOCK_STUDENTS.find(s => +s.id === +id);
-    res.send({success: true, data: student});
+    res.send({ success: true, data: student });
 }
 
+// @description update a Student
+// @route Get -> /api/students:id 
+// @accessor public
 export const updateStudent = (req, res) => {
-    const {id} = req.params;
-    const {name, age } = req.body;
+    const { id } = req.params;
+    const { name, age } = req.body;
     let studentFound = MOCK_STUDENTS.find(s => +s.id === +id);
-    if(name) studentFound.name = name;
-    if(age) studentFound.age = age;
+    if (!name || !age) {
+        res.status(400);
+        throw new Error("Atleast one Feild is Mandetory.")
+    }
+    if (name) studentFound.name = name;
+    if (age) studentFound.age = age;
     res.send('updated a students');
 }
 
+// @description delete a Student
+// @route Get -> /api/students:id 
+// @accessor public
 export const deleteStudent = (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     MOCK_STUDENTS = MOCK_STUDENTS.filter(s => +s.id !== +id);
     res.send('deleted a students');
 }
