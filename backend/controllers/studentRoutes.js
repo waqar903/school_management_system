@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import asyncHandler from 'express-async-handler';
+import { studentSchema } from '../models/studentModel.js';
 
 // @description Mockup DB
 let MOCK_STUDENTS = [
@@ -12,7 +13,8 @@ let MOCK_STUDENTS = [
 // @route Get -> /api/students 
 // @accessor public
 export const getStudents = asyncHandler((req, res) => {
-    res.send(MOCK_STUDENTS);
+    const students = studentSchema.find()
+    res.send(students);
 });
 
 // @description Add a Student
