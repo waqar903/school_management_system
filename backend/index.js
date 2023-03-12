@@ -8,18 +8,18 @@ import studentRoutes from './routes/studentRoutes.js';
 
 
 // configurations
-dotenv.config({path: './.env'});
+dotenv.config({ path: './.env' });
 const app = express();
-app.use(express.json);
-app.use(bodyParser.json({limit:"30mb", extended:true}));
-app.use(bodyParser.urlencoded({limit:"30mb", extended:true}));
+// app.use(express.json);
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use('/api/students', studentRoutes);
 app.use(errorHandler);
 
 
-
+app.listen(5000, () => { console.log('500') })
 
 // mongoose setup to be uncommented upon add of the mongo url & port inside the .env
 
