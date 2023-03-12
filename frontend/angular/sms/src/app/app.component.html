@@ -1,0 +1,44 @@
+<div class="limiter">
+  <div class="container-table100">
+    <h1 style="color: white">School Management system</h1>
+    <div class="wrap-table100">
+      <div class="table100 ver1">
+        <div class="table100-firstcol">
+          <button type="button" class="action-buttons" (click)="add()">
+            +Add new Student
+          </button>
+          <table>
+            <thead>
+              <tr class="row100 head">
+                <th class="cell100 column1">Name</th>
+                <th class="cell100 column2">Age</th>
+                <th class="cell100 column2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of allStdents" class="row100 body">
+                <td class="cell100 column1">{{ s.name }}</td>
+                <td class="cell100 column1">{{ s.age }}</td>
+                <td class="cell100 column1">
+                  <button
+                    type="button"
+                    class="action-buttons"
+                    (click)="update(s.id)"
+                  >
+                    edit</button
+                  ><button
+                    type="button"
+                    class="action-buttons"
+                    (click)="delete(s.id)"
+                  >
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
