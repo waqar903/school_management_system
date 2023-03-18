@@ -18,18 +18,11 @@ app.use(cors());
 app.use('/api/students', studentRoutes);
 app.use(errorHandler);
 
+app.get("/", (req, res) => {
+    res.json({ message: "ok" });
+});
 
 app.listen(5000, () => { console.log('500') })
-
-// mongoose setup to be uncommented upon add of the mongo url & port inside the .env
-
-// const PORT = process.env.PORT || 6001;
-// mongoose.connect(process.env.MONGO_URL, {
-//     useUnifiedTopology:true,
-//     useNewUrlParser:true
-// }).then(()=>{
-//     app.listen(PORT, ()=>console.log(`Server is running on port: ${PORT}`));
-// }).catch((error)=>console.log(`${error} did not connect`));
 
 
 
